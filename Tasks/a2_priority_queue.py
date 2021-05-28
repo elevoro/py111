@@ -25,11 +25,10 @@ def dequeue() -> Any:
 
     :return: dequeued element
     """
-    sorted_tuple = sorted(d.items(), key=lambda x: x[0])
-    dict_ = dict(sorted_tuple)
-    for priority in dict_:
-        if len(dict_[priority]) > 0:
-            return dict_[priority].pop(0)
+    keys_ = sorted(d.keys())
+    for priority in keys_:
+        if len(d[priority]) > 0:
+            return d[priority].pop(0)
 
 
 def peek(ind: int = 0, priority: int = 0) -> Any:
