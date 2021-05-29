@@ -20,7 +20,7 @@ def binary_search(elem: int, arr: Sequence) -> Optional[int]:
         mid = (first + last) // 2
     if arr[mid] != elem:
         return None
-    while arr[mid-1] == elem:
+    while mid > 0 and arr[mid-1] == elem:
         mid = mid - 1
     return mid
 
