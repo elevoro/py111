@@ -16,10 +16,11 @@ def binary_search(elem: int, arr: Sequence, start = 0, end = None) -> Optional[i
     mid = (start + end) // 2
     if elem == arr[mid]:
         return mid
+    while mid > 0 and arr[mid-1] == elem:
+        mid = mid - 1
     if elem < arr[mid]:
         return binary_search(elem, arr, start, mid-1)
     if elem > arr[mid]:
         return binary_search(elem, arr, mid+1, end)
-
 
 
