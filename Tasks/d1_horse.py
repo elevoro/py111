@@ -10,17 +10,12 @@ def calculate_paths(shape: (int, int), point: (int, int)) -> int:
     field = [[0] * shape[1] for _ in range(shape[0])]
     field[0][0] = 1
 
-    change = False
-    while True:
-        if change:
-            break
-        for i in range(shape[0]):
-            for j in range(shape[1]):
-                if field[i][j] != 0:
-                    for step in _possible_steps:
-                        if 0 <= i + step[0] < shape[0] and 0 <= j + step[1] < shape[1]:
-                            field[i + step[0]][j + step[1]] += field[i][j] * 2
-                            change = True
+    for i in range(shape[0]):
+        for j in range(shape[1]):
+            if field[i][j] != 0:
+                for step in _possible_steps:
+                    if 0 <= i + step[0] < shape[0] and 0 <= j + step[1] < shape[1]:
+                        field[i + step[0]][j + step[1]] += field[i][j] * 2
 
     return field[point[0]][point[1]]
 
