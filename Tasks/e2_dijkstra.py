@@ -9,21 +9,9 @@ def dijkstra_algo(g: nx.DiGraph, starting_node: Hashable) -> Mapping[Hashable, U
     :param starting_node: starting node from g
     :return: dict like {'node1': 0, 'node2': 10, '3': 33, ...} with path costs, where nodes are nodes from g
     """
-    g = [("A", "B", 1),
-         ("B", "C", 3),
-         ("C", "E", 4),
-         ("E", "F", 3),
-         ("B", "E", 8),
-         ("C", "D", 1),
-         ("D", "E", 2),
-         ("B", "D", 2),
-         ("G", "D", 1),
-         ("D", "A", 2)]
-    unvisited_nodes = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+    unvisited_nodes = [node for node in g]
     nodes = {node: float('inf') for node in unvisited_nodes}
-    current = starting_node
-    distance = 0
-    nodes[current] = distance
+    nodes[starting_node] = 0
 
     while len(unvisited_nodes) > 0:
         current = unvisited_nodes[0]
@@ -32,12 +20,10 @@ def dijkstra_algo(g: nx.DiGraph, starting_node: Hashable) -> Mapping[Hashable, U
             if nodes[current] > nodes[node]:
                 current = node
 
-        for elem in g:
-            if elem[0] == current:
-                neighbor = elem[1]
-                distance = nodes[current] + elem[2]
-                if distance < nodes[neighbor]:
-                    nodes[neighbor] = distance
+        for neighbor in g[current]:
+            distance = nodes[current] + g[current][neighbor]['weight']
+            if distance < nodes[neighbor]:
+                nodes[neighbor] = distance
         unvisited_nodes.remove(current)
 
     return nodes
